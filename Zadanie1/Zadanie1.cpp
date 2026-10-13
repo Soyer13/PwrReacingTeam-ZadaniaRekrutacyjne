@@ -104,6 +104,21 @@ int main()
         }
 
     }
+
+    //Tworzenie Nowych Pachołków
+    for (int i =0; i < OldConesGroup.size(); i++) {
+        float x = Data[OldConesGroup[i].Id-1].x;
+        float y = Data[OldConesGroup[i].Id-1].y;
+        cout << x << " og " << y << endl;
+        for (int j = 0; j < OldConesGroup[i].GroupIds.size(); j++) {
+            x += Data[OldConesGroup[i].GroupIds[j]-1].x;
+            y += Data[OldConesGroup[i].GroupIds[j]-1].y;
+            cout << Data[OldConesGroup[i].GroupIds[j]].x << " og " << Data[OldConesGroup[i].GroupIds[j]].y << endl;
+        }
+        x = x / (OldConesGroup[i].GroupIds.size() + 1);
+        y = y / (OldConesGroup[i].GroupIds.size() + 1);
+        Data.push_back({Data.size()+1,x,y});
+    }
     cout <<"Testy" << endl;
     // Test Wywalonych id
     for (int i = 0; i < OldConesGroup.size(); i++) {
@@ -130,6 +145,9 @@ int main()
 
     printf("%d n"+n);*/
     // zwrócić tablice z sl
-
+    cout << "Dane Wyjścia"<< endl;
+    for (const auto& p : Data) {
+        cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
+    }
     return 0;
 }
