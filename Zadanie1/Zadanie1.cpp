@@ -55,12 +55,37 @@ int main()
         //cout << id << " " << x << " " << y << " n" << endl;
         Data.push_back({id, x, y});
     }
+    file.close();
     /*  Test Wektora
     for (const auto& p : Data) {
         cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
     }*/
 
-    file.close();
+    //Lista Kontrolna
+
+    bool ConeFlags[n];
+    for (int i = 0; i < n; i++) {
+        ConeFlags[i] = true;
+    }
+    //test ConeFlag
+    /*
+    for (int i = 0; i < n; i++) {
+        cout << ConeFlags[i] << endl ;
+    }*/
+
+
+    // Sprawdzanie Odległości
+    /*
+    for (int i =0; i < Data.size(); i++) {
+        //cout << Data[i].id << " " << Data[i].x << " " << Data[i].y << endl;
+        for (int j =0; j < Data.size(); j++) {
+            if (j = Data[i].id) {
+                continue;
+            }
+
+        }
+    }*/
+
     //wypisanie wektora z danymi
     /*
     for (string dana : Data) {
