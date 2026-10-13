@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <cmath>
 using namespace std;
 int main()
 {
@@ -56,12 +57,12 @@ int main()
         Data.push_back({id, x, y});
     }
     file.close();
-    /*  Test Wektora
+     // Test Danych
     for (const auto& p : Data) {
         cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
-    }*/
+    }
 
-    //Lista Kontrolna
+    //Lista Kontrolna tablica poprawności pomiaru
 
     bool ConeFlags[n];
     for (int i = 0; i < n; i++) {
@@ -73,19 +74,46 @@ int main()
         cout << ConeFlags[i] << endl ;
     }*/
 
-
+    cout <<"Produkcja" << endl;
     // Sprawdzanie Odległości
-    /*
+    int m2 =  pow(m,2);
+    struct ConesGroup {
+        int Id;
+        vector<int> GroupIds;
+    };
+    vector<ConesGroup> OldConesGroup;
     for (int i =0; i < Data.size(); i++) {
         //cout << Data[i].id << " " << Data[i].x << " " << Data[i].y << endl;
+        vector<int> OldConesId;
         for (int j =0; j < Data.size(); j++) {
-            if (j = Data[i].id) {
-                continue;
+            // czy jest sens sprawdać poprawność do błedu pomiaru
+            if (j+1 != Data[i].id and ConeFlags[j] != false) {
+                if (pow(Data[j].x - Data[i].x,2)+pow(Data[j].y - Data[i].y,2) < m2) {
+                    cout << Data[i].id << " " << j<< endl;
+                    cout <<pow(Data[j].x - Data[i].x,2)+pow(Data[j].y - Data[i].y,2) <<"m2" <<m2 << endl;
+                    //Dopisanie do błedów pomiaru
+                    ConeFlags[Data[i].id-1] = false;
+                    ConeFlags[Data[j].id-1] = false;
+                    OldConesId.push_back(Data[j].id);
+                }
             }
 
         }
-    }*/
+        OldConesGroup.push_back({Data[i].id,OldConesId});
+    }
 
+    for (int i = 0; i < OldConesGroup.size(); i++) {
+        cout << OldConesGroup[i].Id << " ";
+        cout <<  "Wywalone Id ";
+        for (int j = 0; j < OldConesGroup[i].GroupIds.size(); j++) {
+            cout << OldConesGroup[i].GroupIds[j] << " ";
+        }
+        cout << endl;
+    }
+    cout << "\nFlagi" <<endl;
+    for (int i = 0; i < n; i++) {
+        cout << "id "<< i+1<< " " << ConeFlags[i] << endl ;
+    }
     //wypisanie wektora z danymi
     /*
     for (string dana : Data) {
@@ -97,5 +125,6 @@ int main()
 
     printf("%d n"+n);*/
     // zwrócić tablice z sl
+    
     return 0;
 }
