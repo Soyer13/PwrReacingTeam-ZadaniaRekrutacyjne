@@ -58,9 +58,10 @@ int main()
     }
     file.close();
      // Test Danych
+    /*
     for (const auto& p : Data) {
         cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
-    }
+    }*/
 
     //Lista Kontrolna tablica poprawności pomiaru
 
@@ -74,7 +75,7 @@ int main()
         cout << ConeFlags[i] << endl ;
     }*/
 
-    cout <<"Produkcja" << endl;
+
     // Sprawdzanie Odległości
     int m2 =  pow(m,2);
     struct ConesGroup {
@@ -89,8 +90,8 @@ int main()
             // czy jest sens sprawdać poprawność do błedu pomiaru
             if (j+1 != Data[i].id and ConeFlags[j] != false) {
                 if (pow(Data[j].x - Data[i].x,2)+pow(Data[j].y - Data[i].y,2) < m2) {
-                    cout << Data[i].id << " " << j<< endl;
-                    cout <<pow(Data[j].x - Data[i].x,2)+pow(Data[j].y - Data[i].y,2) <<"m2" <<m2 << endl;
+                    //cout << Data[i].id << " " << j<< endl;
+                    //cout <<pow(Data[j].x - Data[i].x,2)+pow(Data[j].y - Data[i].y,2) <<"m2" <<m2 << endl;
                     //Dopisanie do błedów pomiaru
                     ConeFlags[Data[i].id-1] = false;
                     ConeFlags[Data[j].id-1] = false;
@@ -109,16 +110,33 @@ int main()
     for (int i =0; i < OldConesGroup.size(); i++) {
         float x = Data[OldConesGroup[i].Id-1].x;
         float y = Data[OldConesGroup[i].Id-1].y;
-        cout << x << " og " << y << endl;
+        //cout << x << " og " << y << endl;
         for (int j = 0; j < OldConesGroup[i].GroupIds.size(); j++) {
             x += Data[OldConesGroup[i].GroupIds[j]-1].x;
             y += Data[OldConesGroup[i].GroupIds[j]-1].y;
-            cout << Data[OldConesGroup[i].GroupIds[j]].x << " og " << Data[OldConesGroup[i].GroupIds[j]].y << endl;
+            //cout << Data[OldConesGroup[i].GroupIds[j]].x << " og " << Data[OldConesGroup[i].GroupIds[j]].y << endl;
         }
         x = x / (OldConesGroup[i].GroupIds.size() + 1);
         y = y / (OldConesGroup[i].GroupIds.size() + 1);
         Data.push_back({Data.size()+1,x,y});
     }
+    vector<cone> EndData;
+    // Wywalanie błędnych pachołków
+    for (int i =0; i < Data.size(); i++) {
+        if (i < n) {
+            if (ConeFlags[i] == true) {
+                EndData.push_back({Data[i].id,Data[i].x,Data[i].y});
+            }
+            else {
+                cout << "usunieto pacholek " <<  Data[i].id <<endl;
+            }
+        }
+        else {
+            EndData.push_back({Data[i].id,Data[i].x,Data[i].y});
+        }
+    }
+
+    /*
     cout <<"Testy" << endl;
     // Test Wywalonych id
     for (int i = 0; i < OldConesGroup.size(); i++) {
@@ -145,8 +163,15 @@ int main()
 
     printf("%d n"+n);*/
     // zwrócić tablice z sl
+    /*
     cout << "Dane Wyjścia"<< endl;
     for (const auto& p : Data) {
+        cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
+    }*/
+
+    //wynik-Test
+    cout << " wynik"<< endl;
+    for (const auto& p : EndData) {
         cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
     }
     return 0;
