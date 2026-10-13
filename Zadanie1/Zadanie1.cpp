@@ -99,9 +99,13 @@ int main()
             }
 
         }
-        OldConesGroup.push_back({Data[i].id,OldConesId});
-    }
+        if (OldConesId.size() != 0) {
+            OldConesGroup.push_back({Data[i].id,OldConesId});
+        }
 
+    }
+    cout <<"Testy" << endl;
+    // Test Wywalonych id
     for (int i = 0; i < OldConesGroup.size(); i++) {
         cout << OldConesGroup[i].Id << " ";
         cout <<  "Wywalone Id ";
@@ -110,6 +114,7 @@ int main()
         }
         cout << endl;
     }
+    //test flag po wywaleniu bledu
     cout << "\nFlagi" <<endl;
     for (int i = 0; i < n; i++) {
         cout << "id "<< i+1<< " " << ConeFlags[i] << endl ;
@@ -125,6 +130,6 @@ int main()
 
     printf("%d n"+n);*/
     // zwrócić tablice z sl
-    
+
     return 0;
 }
