@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
@@ -95,7 +96,8 @@ vector<cone> ConeErrorDetection(string FilePath) {
         }
         x = x / (OldConesGroup[i].GroupIds.size() + 1);
         y = y / (OldConesGroup[i].GroupIds.size() + 1);
-        Data.push_back({Data.size()+1,x,y});
+        int newId = Data.size()+1;
+        Data.push_back({newId,x,y});
     }
     vector<cone> EndData;
     // Wywalanie błędnych pachołków
@@ -122,17 +124,76 @@ vector<cone> ConeErrorDetection(string FilePath) {
     return EndData;
 }
 
-int CrovexHull(vector<cone> Data) {
 
-}
+/*Zadanie 2 
+int CrovexHull(vector<cone> Data) {
+    //vector<cone> SortedData = Data.sort;
+    //sortowanie danych
+    /*
+    sort(Data.begin(), Data.end(), [](const cone& a, const cone& b) {return a.x < b.x;});
+    if (Data[0].x == Data[1].x) {
+        sort(Data.begin(), Data.end(), [](const cone& a, const cone& b) {
+            if (abs(a.x - b.x) > 1e-9) {
+                return a.x < b.x;
+            }
+            return a.y < b.y;
+        });
+    }*/
+    /*
+
+
+    vector<cone> CorvexHullData;
+    vector<cone> lower;
+    lower.push_back(Data[0]);
+    for (int i = 0; i < Data.size(); i++) {
+        if ( cross_product()> 0**)
+    }*//*
+    sort(Data.begin(), Data.end(), [](const cone& a, const cone& b) {return a.x < b.x;});
+    cout << "CrovexHull" << endl;
+    for (const cone& c : Data) {
+        cout << c.id << " " << c.x << " " << c.y << endl;
+    }
+    vector<cone> lower;
+    float AB,AC,tgx=1;
+    int nextId=0;
+    lower.push_back(Data[nextId]);
+    for (int i = 1; i < Data.size(); i++) {
+        for (int j = 1; j < Data.size(); j++) {
+            if (Data[j].x > lower[i-1].x && Data[j].y < lower[i-1].y) {
+
+                AB = sqrt(pow((Data[j].y, - lower[i-1].y),2));
+                AC = sqrt(pow((Data[j].x, - lower[i-1].x),2));
+                if (tgx >AC/AB) {
+                    cout<< "n"<<endl;
+                    tgx = AC/AB;
+                    nextId = i;
+                }
+            }
+
+        }
+        lower.push_back(Data[nextId]);
+    }
+
+    cout << "lower" << endl;
+    for (const cone& c : lower) {
+        cout << c.id << " " << c.x << " " << c.y << endl;
+    }
+    //cout << "aAA"<< cross_product(Data[0],Data[1],Data[2])<<endl;
+    return 0;
+    //znaleś punkt najbardziej w lewo
+    //sprawdza kąt z prawej strony z dołu dopuki są x > obecnego x
+    //sprawda kąty z lewej z góry i szuka najmniejszego dopuki x< obecnego
+}*/
 int main()
 {
     vector<cone> data = ConeErrorDetection("../Dane/zad1/example_input.txt");
+    CrovexHull(data);
     /*
     cout << "Main" << endl;
     for (const cone& c : data) {
         cout << c.id << " " << c.x << " " << c.y << endl;
-    }*/
+    }
+    */
 
 
     return 0;
