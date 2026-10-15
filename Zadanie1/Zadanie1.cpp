@@ -6,21 +6,23 @@
 #include <sstream>
 #include <cmath>
 using namespace std;
-int main()
-{
-    string path("../Dane/zad1/example_input.txt");
+
+struct cone {
+    int id;
+    float x;
+    float y;
+};
+vector<cone> ConeErrorDetection(string FilePath) {
+    string path =FilePath;
+    //("../Dane/zad1/example_input.txt");
     ifstream file(path);
     string line;
-    struct cone {
-        int id;
-        float x;
-        float y;
-    };
+
     vector<cone> Data;
     //kontrola błedu otwierania pliku
     if (!file.is_open()) {
         printf( ("Nie mozna otworzyc pliku! " +path).c_str());
-        return 1;
+        return Data;
     }
 
     int n = 0; //liczba punktów w zbiorze
@@ -116,5 +118,22 @@ int main()
     for (const auto& p : EndData) {
         cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
     }
+
+    return EndData;
+}
+
+int CrovexHull(vector<cone> Data) {
+
+}
+int main()
+{
+    vector<cone> data = ConeErrorDetection("../Dane/zad1/example_input.txt");
+    /*
+    cout << "Main" << endl;
+    for (const cone& c : data) {
+        cout << c.id << " " << c.x << " " << c.y << endl;
+    }*/
+
+
     return 0;
 }
