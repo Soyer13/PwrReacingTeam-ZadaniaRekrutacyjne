@@ -13,16 +13,16 @@ struct cone {
     float x;
     float y;
 };
+//zad1.1
 vector<cone> ConeErrorDetection(string FilePath) {
-    string path =FilePath;
     //("../Dane/zad1/example_input.txt");
-    ifstream file(path);
+    ifstream file(FilePath);
     string line;
 
     vector<cone> Data;
     //kontrola błedu otwierania pliku
     if (!file.is_open()) {
-        printf( ("Nie mozna otworzyc pliku! " +path).c_str());
+        printf( ("Nie mozna otworzyc pliku! " +FilePath).c_str());
         return Data;
     }
 
@@ -115,17 +115,11 @@ vector<cone> ConeErrorDetection(string FilePath) {
         }
     }
 
-    //wynik-Test
-    cout << " wynik"<< endl;
-    for (const auto& p : EndData) {
-        cout << "ID: " << p.id << " | X: " << p.x << " | Y: " << p.y << endl;
-    }
-
     return EndData;
 }
 
 
-/*Zadanie 2 
+/*Zadanie 1.2
 int CrovexHull(vector<cone> Data) {
     //vector<cone> SortedData = Data.sort;
     //sortowanie danych
@@ -187,13 +181,11 @@ int CrovexHull(vector<cone> Data) {
 int main()
 {
     vector<cone> data = ConeErrorDetection("../Dane/zad1/example_input.txt");
-    CrovexHull(data);
-    /*
-    cout << "Main" << endl;
-    for (const cone& c : data) {
-        cout << c.id << " " << c.x << " " << c.y << endl;
+    //CrovexHull(data);
+
+    for (int i =0; i < data.size(); i++) {
+        cout <<"id: "<< data[i].id << " | x=  " << data[i].x << " | y= " << data[i].y << endl;
     }
-    */
 
 
     return 0;
